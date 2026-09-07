@@ -281,6 +281,10 @@ async function _sendSms(user, fullName, paymentUrl, amount) {
   );
 }
 
+//il fallais tous changer
+
+///changer tous les noms de fichier et de dossier pour que ca marche
+
 module.exports = {
   createPaymentLink,
   getPaymentDetails,
