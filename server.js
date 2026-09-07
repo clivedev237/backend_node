@@ -17,6 +17,14 @@ app.use(cors({ origin: process.env.CORS_ORIGIN || '*' }));
 app.use(express.json());                          // pour les appels JSON (Spring, API)
 app.use(express.urlencoded({ extended: true }));   // pour le formulaire HTML /pay/:token
 
+// ─── Documentation Swagger ──────────────────────────────────────────────── AJOUT
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./config/swagger');
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.get('/api-docs.json', (_req, res) => res.json(swaggerSpec));
+// ────────────────────────────────────────────────────────────────────── FIN AJOUT
+
 // ─── Health check (utile pour Render et pour vos propres tests) ───────────
 app.get('/actuator/health', (_req, res) => res.json({ status: 'UP' }));
 app.get('/health', (_req, res) => res.json({ status: 'UP' }));
